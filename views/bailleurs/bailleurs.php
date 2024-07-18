@@ -22,14 +22,26 @@ $bailleurs = getAllBailleurs();
     <?php
     if (isset($_GET['message'])) {
       $message = $_GET['message'];
+     
     ?>
       <div class="alert alert-success alert-dismissible fade show" role="alert">
         <?= $message; ?>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
       </div>
     <?php
-    }
-    ?>
+    }else 
+    if (isset($_GET['error'])) {
+      $error = $_GET['error'];
+      ?>
+      <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <?= $error; ?>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label
+        ="Close"></button>
+        </div>
+        <?php
+        }
+        ?>
+  
     <table id="myDataTable" class="display" style="width:100%">
       <thead>
         <tr>
@@ -39,7 +51,6 @@ $bailleurs = getAllBailleurs();
           <th>Adresse</th>
           <th>Téléphone</th>
           <th>CIN</th>
-          <th>Libelle</th>
           <th>Actions</th>
         </tr>
       </thead>
@@ -52,7 +63,6 @@ $bailleurs = getAllBailleurs();
             <td><?= $bailleur->adresse ?></td>
             <td><?= $bailleur->tel ?></td>
             <td><?= $bailleur->CIN ?></td>
-            <td><?= isset($bailleur->libelle) ? $bailleur->libelle : '' ?></td>
             <td>
               <a href="edit_bailleur.php?id=<?= $bailleur->id ?>" class="btn btn-primary">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">

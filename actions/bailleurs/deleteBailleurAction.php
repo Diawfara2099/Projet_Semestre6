@@ -8,12 +8,19 @@ if(isset($_GET['id']) && !empty($_GET['id']) && filter_var($_GET['id'], FILTER_V
     $result = getOneBailleur($id);
 
     if($result->rowCount() > 0){
-        deleteBailleur($id);
-        $message = "Le bailleur a été supprimé avec succès!";
-    }else{
-        $errorMessage =  'Ce bailleur n\'existe pas!';
+        // Vérifier si le bailleur a des locations associées
+        $locationResult = getLocationsByBailleur($id);
+
+        if($locationResult->rowCount() == 0){
+            deleteBailleur($id);
+            $message = "Le bailleur a été supprimé avec succès!";
+        } else {
+            $errorMessage = 'Ce bailleur ne peut pas être supprimé car il possède des locations associées!';
+        }
+    } else {
+        $errorMessage = 'Ce bailleur n\'existe pas!';
     }
-}else{
+} else {
     $errorMessage = "L'id du bailleur doit être un entier valide supérieur ou égal à 1!";
 }
 

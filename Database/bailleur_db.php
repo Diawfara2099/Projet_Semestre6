@@ -49,3 +49,12 @@ function deleteBailleur($id) {
     $stmt = $connexion->prepare("DELETE FROM bailleur WHERE id = ?");
     $stmt->execute([$id]);
 }
+
+function getLocationsByBailleur($id_bailleur) {
+    global $connexion;;
+    $query = $connexion->prepare('SELECT * FROM Location WHERE id_bailleur = :id_bailleur');
+    $query->bindParam(':id_bailleur', $id_bailleur, PDO::PARAM_INT);
+    $query->execute();
+    return $query;
+}
+

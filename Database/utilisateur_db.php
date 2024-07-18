@@ -1,9 +1,6 @@
 <?php
 require('db_connection.php');
 
-define("UPLOAD_IMAGES_AVATAR", $_SERVER['DOCUMENT_ROOT'].'/uploads/images/avatars/');
-define("FETCH_IMAGES_AVATAR", "http://projet-semestre-6-gestion-mmoblier.test".'/uploads/images/avatars/');
-
 function getAllUsers(){
     global $connexion;
     $query = "SELECT * FROM user";
@@ -20,7 +17,7 @@ function getUserByEmail($email){
     return $stmt;
 }
 
-function addUser($nom, $prenom, $email, $password, $avatar_name, $type) {
+function addUser1($nom, $prenom, $email, $password, $avatar_name, $type) {
     global $connexion;
 
     $query = "INSERT INTO user(nom, prenom, email, password, avatar_name, type
@@ -28,4 +25,23 @@ function addUser($nom, $prenom, $email, $password, $avatar_name, $type) {
     $stmt = $connexion->prepare($query);
     $stmt->execute(array($nom, $prenom, $email, $password, $avatar_name, $type));
     $stmt->closeCursor();
+}
+// Fonction pour créer un utilisateur
+function addUser($nom, $prenom, $email, $password, $type, $login) {
+    global $connexion; // Rend la variable $connexion globale à cette fonction
+    $query = $connexion->prepare('INSERT INTO User (nom, prenom, email, password, type, login) VALUES (:nom, :prenom, :email, :password, :type, :login)');
+    $query->bindParam(':nom', $nom);
+    $query->bindParam(':prenom', $prenom);
+    $query->bindParam(':email', $email);
+    $query->bindParam(':password', $password);
+    $query->bindParam(':type', $type);
+    $query->bindParam(':login', $login);
+    return $query->execute();
+}
+
+// Fonction pour obtenir tous les types d'utilisateur
+function getAlltypes() {
+    global $connexion;
+    $query = $connexion->query('SELECT * FROM UserType');
+    return $query;
 }

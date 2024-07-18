@@ -3,7 +3,6 @@
 $user = true;
 
 include_once '../../header.php';
-
 include_once '../../navbar.php';
 require_once '../../Database/utilisateur_db.php';
 
@@ -15,7 +14,7 @@ $users = getAllUsers();
 <main class="flex-shrink-0">
     <div class="container">
         <h1 class="mt-5">Utilisateurs</h1>
-        <?php if($_SESSION['profil'] == 1): ?>
+        <?php if($_SESSION['type'] == 'administrateur'): ?>
         <a href="create_user.php">
             <button type="button" class="float-end mb-2 btn btn-primary">
                 Nouveau
@@ -28,37 +27,35 @@ $users = getAllUsers();
         <table id="myDataTable" class="display" style="width:100%">
             <thead>
                 <tr>
-                    <th>Avatar</th>
                     <th>Nom</th>
                     <th>Prenom</th>
+                    <th>Login</th>
                     <th>Email</th>
+                    <th>Type</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
                 <?php while ($user = $users->fetch(PDO::FETCH_OBJ)) : ?>
                     <tr>
-                        <td>
-                            <?php
-                                ?>
-                                <img src="<?= FETCH_IMAGES_AVATAR.$user->avatar_name ?>" style="width: 35px;">
-                                <?php
-                            ?>
-                            </td>
                         <td><?= $user->nom ?></td>
                         <td><?= $user->prenom ?></td>
+                        <td><?= $user->login ?></td>
                         <td><?= $user->email ?></td>
+                        <td><?= $user->type ?></td>
+                        <td>
+                            <!-- Ajoutez ici les boutons d'actions si nécessaire -->
+                        </td>
                     </tr>
                 <?php endwhile; ?>
             </tbody>
         </table>
-        <?php endif ?>
-
-        <?php if($_SESSION['profil'] == 2): ?>
+        <?php else: ?>
             <h1 class="mt-5">Vous devez être Administrateur pour accéder à cette page</h1>
         <?php endif ?>
     </div>
 </main>
 
 <?php
-include_once '../../footer.php'
+include_once '../../footer.php';
 ?>

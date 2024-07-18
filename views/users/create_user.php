@@ -5,8 +5,8 @@ $user = true;
 include_once '../../header.php';
 
 include_once '../../navbar.php';
-require_once '../../Database/profil_db.php';
-$profils = getAllProfils();
+require_once '../../Database/utilisateur_db.php';
+
 ?>
 
 <!-- Begin page content -->
@@ -24,14 +24,7 @@ $profils = getAllProfils();
         }
         ?>
         <form class="row g-3" method="POST" enctype="multipart/form-data">
-            <div class="col-md-6">
-                <img id="imagePreview" src="#" style="max-width: 80px; ">
-            </div>
-            <div class="input-group mb-3">
-                <label class="input-group-text" for="inputGroupFile01">Avatar</label>
-                <input type="file" class="form-control" name="avatar" accept=".png,.jpg,.svg">
-            </div>
-
+        
             <div class="col-md-6">
                 <label for="inputEmail4" class="form-label">Nom</label>
                 <input type="text" class="form-control" name="nom">
@@ -39,6 +32,10 @@ $profils = getAllProfils();
             <div class="col-md-6">
                 <label for="inputPassword4" class="form-label">Prénom</label>
                 <input type="text" class="form-control" name="prenom">
+            </div>
+            <div class="col-md-6">
+                <label for="inputPassword4" class="form-label">Login</label>
+                <input type="text" class="form-control" name="login">
             </div>
             <div class="col-12">
                 <label for="inputAddress" class="form-label">Email</label>
@@ -49,12 +46,11 @@ $profils = getAllProfils();
                 <input type="password" class="form-control" name="password">
             </div>
             <div class="col-md-4">
-                <label for="inputState" class="form-label">Profil</label>
-                <select id="inputState" class="form-select" name="profil_id">
-                    <option selected value="0">Séléctionner...</option>
-                    <?php while ($profil = $profils->fetch(PDO::FETCH_OBJ)) : ?>
-                        <option value="<?= $profil->id ?>"><?= $profil->designation ?></option>
-                    <?php endwhile; ?>
+                <label for="inputState" class="form-label">type</label>
+                <select id="inputState" class="form-select" name="type">
+                    <option selected disabled>Sélectionner...</option>
+                    <option value="administrateur">Administrateur</option>
+                    <option value="gestionnaire">Gestionnaire</option>
                 </select>
             </div>
 
