@@ -44,8 +44,18 @@ $users = getAllUsers();
                         <td><?= $user->email ?></td>
                         <td><?= $user->type ?></td>
                         <td>
-                            <!-- Ajoutez ici les boutons d'actions si nécessaire -->
-                        </td>
+    <a href="edit_user.php?id=<?= $user->id ?>" class="btn btn-sm btn-warning me-2" title="Modifier">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
+            <path d="M12.48 0l3.523 3.523-10.025 10.025-3.523-3.523L12.48 0zm.427 1.427L2 11.335V14h2.665L14.573 4.113 12.907 2.437zM2.845 12.561l-.793.792a1.223 1.223 0 0 0-.356.88L1.5 15l2.845-.845a1.223 1.223 0 0 0 .88-.356l.792-.793-2.845.845zm9.002-9.002l-1.414 1.414 1.023 1.023 1.414-1.414-1.023-1.023z"/>
+        </svg>
+    </a>
+    <a href="delete_user.php?id=<?= $user->id ?>" class="btn btn-sm btn-danger" title="Supprimer">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+            <path d="M0 3a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v1H0V3zm13.5 2h-11l-.5 9a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1l-.5-9zM5 6V5h1v1H5zm2 0V5h1v1H7z"/>
+        </svg>
+    </a>
+</td>
+
                     </tr>
                 <?php endwhile; ?>
             </tbody>

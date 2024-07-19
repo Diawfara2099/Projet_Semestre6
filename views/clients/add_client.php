@@ -1,6 +1,6 @@
 <?php
-require('../../actions/bailleurs/createBailleursAction.php');
-$bailleur = true;
+require('../../actions/clients/createClientsAction.php');
+$client = true;
 include_once '../../header.php';
 include_once '../../navbar.php';
 ?>
@@ -8,7 +8,7 @@ include_once '../../navbar.php';
 <!-- Begin page content -->
 <main class="flex-shrink-0">
     <div class="container">
-        <h1 class="mt-5">Nouveau Bailleur</h1>
+        <h1 class="mt-5">Nouveau client</h1>
         <?php
         if (isset($errorMessage)) {
         ?>
@@ -29,8 +29,8 @@ include_once '../../navbar.php';
                 <input type="text" class="form-control" id="inputPrenom" name="prenom" required>
             </div>
             <div class="col-12">
-                <label for="inputAdresse" class="form-label">Adresse</label>
-                <input type="text" class="form-control" id="inputAdresse" name="adresse" required>
+                <label for="inputAdresse" class="form-label">Email</label>
+                <input type="email" class="form-control" id="inputAdresse" name="email" required>
             </div>
             <div class="col-12">
                 <label for="inputTel" class="form-label">Téléphone</label>
