@@ -1,6 +1,13 @@
 <?php
 require('db_connection.php');
 
+
+function getUsers() {
+    global $connexion;
+    $query = "SELECT id, nom, prenom FROM user"; // Adaptez le nom de la table et les colonnes selon votre schéma
+    $resultat = $connexion->query($query);
+    return $resultat;
+}
 function getAllUsers(){
     global $connexion;
     $query = "SELECT * FROM user";

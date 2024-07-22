@@ -2,6 +2,12 @@
 
 require_once 'db_connection.php'; // Inclure le fichier de connexion à la base de données
 
+function getClients() {
+    global $connexion;
+    $query = "SELECT id, nom, prenom FROM client";
+    $resultat = $connexion->query($query);
+    return $resultat;
+}
 // Fonction pour récupérer tous les client depuis la base de données
 function getAllClient() {
     global $connexion; // Utilisation de la connexion à la base de données définie dans db_connection.php

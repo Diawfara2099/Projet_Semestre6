@@ -2,6 +2,12 @@
 
 require_once 'db_connection.php'; // Inclure le fichier de connexion à la base de données
 
+function getContrats() {
+    global $connexion;
+    $query = "SELECT id FROM contrat";
+    $resultat = $connexion->query($query);
+    return $resultat;
+}
 function getAllContrat() {
     global $connexion; // Utilisation de la connexion à la base de données définie dans db_connection.php
 
