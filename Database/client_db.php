@@ -43,7 +43,7 @@ function updateClient($id, $nom, $prenom, $email, $tel, $CIN) {
 }
 
 
-// Dans votre fichier Client_db.php
+
 function deleteClient($id) {
     global $connexion;
     $stmt = $connexion->prepare("DELETE FROM Client WHERE id = ?");

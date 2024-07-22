@@ -91,7 +91,17 @@ function createContrat($date_DEB, $date_FIN, $modePaiement, $id_client, $id_loca
         $stmt->execute([$date_DEB, $date_FIN, $modePaiement, $id_client, $id_location, $id]);
     }
     
-    
+   
+    // Récupère un Client par son ID
+function getOneContrat($id) {
+    global $connexion;
+    $query = $connexion->prepare("SELECT * FROM Contrat WHERE id = ?");
+    $query->execute([$id]);
+    return $query;
+}
 
-        
-    
+function deleteContrat($id) {
+    global $connexion;
+    $stmt = $connexion->prepare("DELETE FROM contrat WHERE id = ?");
+    $stmt->execute([$id]);
+}

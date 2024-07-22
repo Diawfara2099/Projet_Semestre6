@@ -66,18 +66,33 @@ $contrats = getAllContrat();
                     <td><?= htmlspecialchars($contrat['location_adresse']) ?></td>
                     <td><?= htmlspecialchars($contrat['type_location']) ?></td>
                     <td>
-                        <a href="edit_contrat.php?id=<?= htmlspecialchars($contrat['id']) ?>" class="btn btn-sm btn-warning me-2" title="Modifier">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
-                                <path d="M12.48 0l3.523 3.523-10.025 10.025-3.523-3.523L12.48 0zm.427 1.427L2 11.335V14h2.665L14.573 4.113 12.907 2.437zM2.845 12.561l-.793.792a1.223 1.223 0 0 0-.356.88L1.5 15l2.845-.845a1.223 1.223 0 0 0 .88-.356l.792-.793-2.845.845zm9.002-9.002l-1.414 1.414 1.023 1.023 1.414-1.414-1.023-1.023z"/>
-                            </svg>
-                        </a>
-                        <a href="delete_contrat.php?id=<?= htmlspecialchars($contrat['id']) ?>" class="btn btn-sm btn-danger" title="Supprimer">
+                        <a type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deletecontratModal<?= htmlspecialchars($contrat['id']) ?>">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-                                <path d="M0 3a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v1H0V3zm13.5 2h-11l-.5 9a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1l-.5-9zM5 6V5h1v1H5zm2 0V5h1v1H7z"/>
+                              <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z" />
+                              <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z" />
                             </svg>
                         </a>
                     </td>
                 </tr>
+                <!-- Modal -->
+                <div class="modal fade" id="deletecontratModal<?= htmlspecialchars($contrat['id']) ?>" tabindex="-1" aria-labelledby="deletecontratModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="deletecontratModalLabel">Suppression contrat: <?= htmlspecialchars($contrat['client_nom'] . ' ' . $contrat['client_prenom']) ?></h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                Voulez-vous supprimer ce contrat ?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                                <a href="/actions/contrats/deleteContratAction.php?id=<?= htmlspecialchars($contrat['id']) ?>" class="btn btn-danger">Supprimer</a>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <?php endforeach; ?>
             </tbody>
         </table>
