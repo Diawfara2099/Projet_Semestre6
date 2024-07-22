@@ -24,8 +24,6 @@ function addPaiemnt($date_paiement, $contrat_id, $client_id, $gestionnaire_id){
 }
 */
 
-require('../../Database/db_connection.php');
-
 function addPaiement($date_paiement, $contrat_id, $gestionnaire_id) {
     global $connexion;
 
