@@ -47,3 +47,16 @@ function addPaiement($date_paiement, $contrat_id, $gestionnaire_id) {
     }
 }
 
+
+function getPaiementById($id) {
+    global $connexion;
+    $query = 'SELECT p.*, c.nom as client_nom, c.prenom as client_prenom
+              FROM paiements p
+              JOIN contrat ct ON p.contrat_id = ct.id
+              JOIN client c ON ct.id_client = c.id
+              WHERE p.id = :id';
+    $stmt = $connexion->prepare($query);
+    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+    $stmt->execute();
+    return $stmt->fetch(PDO::FETCH_OBJ);
+}
