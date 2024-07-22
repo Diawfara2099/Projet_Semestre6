@@ -58,3 +58,19 @@ function getPaiementById($id) {
     $stmt->execute();
     return $stmt->fetch(PDO::FETCH_OBJ);
 }
+
+
+function deletePaiement($id) {
+    global $connexion;
+    $stmt = $connexion->prepare("DELETE FROM paiements WHERE id = ?");
+    $stmt->execute([$id]);
+}
+
+
+
+function getOnePaiement($id) {
+    global $connexion;
+    $query = $connexion->prepare("SELECT * FROM paiements WHERE id = ?");
+    $query->execute([$id]);
+    return $query;
+}
