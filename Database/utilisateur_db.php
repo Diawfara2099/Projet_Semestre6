@@ -1,6 +1,7 @@
 <?php
-require('db_connection.php');
+//require('db_connection.php');
 
+require_once('db_connection.php');
 
 function getUsers() {
     global $connexion;
@@ -15,14 +16,28 @@ function getAllUsers(){
     return $resultat;
 }
 
-function getUserByEmail($email){
+// function getUserByEmail($email){
+//     global $connexion;
+
+//     $query = "SELECT * FROM user WHERE email = ?";
+//     $stmt = $connexion->prepare($query);
+//     $stmt->execute(array($email));
+//     return $stmt;
+// }
+
+function getUserByEmail($email) {
     global $connexion;
+    
+    if ($connexion === null) {
+        throw new Exception('Database connection is not initialized.');
+    }
 
     $query = "SELECT * FROM user WHERE email = ?";
     $stmt = $connexion->prepare($query);
     $stmt->execute(array($email));
     return $stmt;
 }
+
 
 function addUser1($nom, $prenom, $email, $password, $avatar_name, $type) {
     global $connexion;
@@ -51,4 +66,21 @@ function getAlltypes() {
     global $connexion;
     $query = $connexion->query('SELECT * FROM UserType');
     return $query;
+}
+
+function getUserById($id) {
+    global $connexion;
+    $sql = "SELECT * FROM user WHERE id = :id";
+    $stmt = $connexion->prepare($sql);
+    $stmt->execute([':id' => $id]);
+    return $stmt->fetch(PDO::FETCH_OBJ);
+}
+
+
+function updateUser($id, $nom, $prenom, $login, $email, $type) {
+    global $connexion;
+
+    $sql = "UPDATE user SET nom = :nom, prenom = :prenom, login = :login, email = :email, type = :type WHERE id = :id";
+    $stmt = $connexion->prepare($sql);
+    return $stmt->execute([':nom' => $nom, ':prenom' => $prenom, ':login' => $login, ':email' => $email, ':type' => $type, ':id' => $id]);
 }

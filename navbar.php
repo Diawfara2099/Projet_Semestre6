@@ -1,4 +1,8 @@
+<?php
+$user = false;
 
+
+?>
 <header>
   <!-- Fixed navbar -->
   <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
@@ -21,7 +25,7 @@
             <a class="nav-link <?= !empty($location) ? 'active' : '' ?>" href="/views/locations/locations.php">Locations</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link <?= !empty($user) ? 'active' : '' ?>" href="/views/users/users.php">Utilisateurs</a>
+            <a class="nav-link <?= !empty($user) ? 'active' : ''; ?>" href="/views/users/users.php">Utilisateurs</a>
           </li>
           <?php elseif(isset($_SESSION['type']) && $_SESSION['type'] == 'gestionnaire'): ?>
           <li class="nav-item">

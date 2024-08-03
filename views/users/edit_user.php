@@ -1,57 +1,47 @@
 <?php
-// Incluez les fichiers nécessaires
-require('../../actions/users/editUserAction.php');
-
 include_once '../../header.php';
 include_once '../../navbar.php';
+require_once '../../Database/utilisateur_db.php';
+
+if (!isset($_GET['id'])) {
+    header('Location: users.php');
+    exit;
+}
+
+$user = getUserById($_GET['id']);
 ?>
 
-<!-- Begin page content -->
 <main class="flex-shrink-0">
-  <div class="container">
-    <h1 class="mt-5">Modification utilisateur</h1>
-
-    <?php if (isset($errorMessage)): ?>
-      <div class="alert alert-warning alert-dismissible fade show" role="alert">
-        <?= htmlspecialchars($errorMessage); ?>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-      </div>
-    <?php endif; ?>
-
-    <?php if (isset($nom) && isset($prenom) && isset($email) && isset($login) && isset($type)): ?>
-      <form class="row g-3" method="POST" action="update_user.php">
-        <input type="hidden" name="id" value="<?= htmlspecialchars($id); ?>">
-        <div class="col-md-6">
-          <label for="nom" class="form-label">Nom</label>
-          <input type="text" class="form-control" id="nom" name="nom" value="<?= htmlspecialchars($nom); ?>" required>
-        </div>
-        <div class="col-md-6">
-          <label for="prenom" class="form-label">Prénom</label>
-          <input type="text" class="form-control" id="prenom" name="prenom" value="<?= htmlspecialchars($prenom); ?>" required>
-        </div>
-        <div class="col-md-6">
-          <label for="email" class="form-label">Email</label>
-          <input type="email" class="form-control" id="email" name="email" value="<?= htmlspecialchars($email); ?>" required>
-        </div>
-        <div class="col-md-6">
-          <label for="login" class="form-label">Login</label>
-          <input type="text" class="form-control" id="login" name="login" value="<?= htmlspecialchars($login); ?>" required>
-        </div>
-        <div class="col-md-6">
-          <label for="type" class="form-label">Type</label>
-          <select class="form-select" id="type" name="type" required>
-            <option value="administrateur" <?= $type === 'administrateur' ? 'selected' : '' ?>>Administrateur</option>
-            <option value="gestionnaire" <?= $type === 'gestionnaire' ? 'selected' : '' ?>>Gestionnaire</option>
-          </select>
-        </div>
-        <div class="col-12">
-          <button type="submit" name="envoyer" class="btn btn-primary">Modifier</button>
-        </div>
-      </form>
-    <?php else: ?>
-      <p>Utilisateur non trouvé.</p>
-    <?php endif; ?>
-  </div>
+    <div class="container">
+        <h1 class="mt-5">Modifier l'utilisateur</h1>
+        <form action="../../actions/users/editUserAction.php" method="post">
+            <input type="hidden" name="id" value="<?= $user->id ?>">
+            <div class="mb-3">
+                <label for="nom" class="form-label">Nom</label>
+                <input type="text" class="form-control" id="nom" name="nom" value="<?= $user->nom ?>" required>
+            </div>
+            <div class="mb-3">
+                <label for="prenom" class="form-label">Prénom</label>
+                <input type="text" class="form-control" id="prenom" name="prenom" value="<?= $user->prenom ?>" required>
+            </div>
+            <div class="mb-3">
+                <label for="login" class="form-label">Login</label>
+                <input type="text" class="form-control" id="login" name="login" value="<?= $user->login ?>" required>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" name="email" value="<?= $user->email ?>" required>
+            </div>
+            <div class="mb-3">
+                <label for="type" class="form-label">Type</label>
+                <select class="form-control" id="type" name="type" required>
+                    <option value="utilisateur" <?= $user->type == 'gestionnaire' ? 'selected' : '' ?>>Gestionnaire</option>
+                    <option value="administrateur" <?= $user->type == 'administrateur' ? 'selected' : '' ?>>Administrateur</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
+        </form>
+    </div>
 </main>
 
 <?php
