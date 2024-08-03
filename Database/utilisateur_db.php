@@ -3,6 +3,13 @@
 
 require_once('db_connection.php');
 
+
+function getOnUser($id) {
+    global $connexion;
+    $query = $connexion->prepare("SELECT * FROM user WHERE id = ?");
+    $query->execute([$id]);
+    return $query;
+}
 function getUsers() {
     global $connexion;
     $query = "SELECT id, nom, prenom FROM user"; // Adaptez le nom de la table et les colonnes selon votre schéma
@@ -83,4 +90,13 @@ function updateUser($id, $nom, $prenom, $login, $email, $type) {
     $sql = "UPDATE user SET nom = :nom, prenom = :prenom, login = :login, email = :email, type = :type WHERE id = :id";
     $stmt = $connexion->prepare($sql);
     return $stmt->execute([':nom' => $nom, ':prenom' => $prenom, ':login' => $login, ':email' => $email, ':type' => $type, ':id' => $id]);
+}
+
+
+function deleteUser($id) {
+    global $connexion;
+    
+    $sql = "DELETE FROM user WHERE id = :id";
+    $stmt = $connexion->prepare($sql);
+    return $stmt->execute([':id' => $id]);
 }
