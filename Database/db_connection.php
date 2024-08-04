@@ -3,7 +3,7 @@
 $hote = "localhost";
 $user = "root";
 $password= "";
-$dbName = "immoblier";
+$dbName = "immobilier";
 
 $dsn = "mysql:host=$hote;dbname=$dbName;charset=utf8";
 try {

@@ -1,5 +1,5 @@
 <?php
-require('../../actions/clients/editClientsAction.php');
+require_once '../../actions/clients/editClientsAction.php';
 $client = true;
 include_once '../../header.php';
 include_once '../../navbar.php';

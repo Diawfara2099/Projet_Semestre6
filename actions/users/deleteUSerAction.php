@@ -8,11 +8,11 @@ if (isset($_GET['id']) && !empty($_GET['id']) && filter_var($_GET['id'], FILTER_
         $usser = $resultat->fetch();
         deleteUser($usser['id']);
         $message = "Utilisateur a été supprimé avec succès!";
-        header("Location: /views/ussers/ussers.php?message=" . urlencode($message));
+        header("Location: /views/users/users.php?message=" . urlencode($message));
         exit();
     } else {
         $errorMessage = 'Cette Utilisateur n\'existe pas!';
-        header("Location: /views/ussers/ussers.php?error=" . urlencode($errorMessage));
+        header("Location: /views/users/users.php?error=" . urlencode($errorMessage));
         exit();
     }
 } else {
