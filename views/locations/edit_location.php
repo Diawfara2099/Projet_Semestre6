@@ -36,17 +36,21 @@ include_once '../../navbar.php';
         <input type="text" class="form-control" name="prix" value="<?= $location->prix ?>" required><br>
         
         <!-- Menu déroulant pour sélectionner le bailleur -->
-        <label for="bailleur_id" class="form-label">Bailleur:</label>
-        <select class="form-select" name="bailleur_id" required>
-            <?php foreach ($bailleurs as $bailleur) : ?>
-                <option value="<?= $bailleur->id ?>" <?= ($bailleur->id == $location->id_bailleur) ? 'selected' : '' ?>>
-                    <?= $bailleur->nom ?> <?= $bailleur->prenom ?>
+      
+            <!-- Menu déroulant pour sélectionner le bailleur -->
+        <label for="bailleur" class="form-label">Bailleur:</label>
+        <select id="bailleur" name="bailleur_id" class="form-select" required>
+            <?php while ($bailleur = $bailleurs->fetch(PDO::FETCH_OBJ)) : ?>
+                <option value="<?= htmlspecialchars($bailleur->id) ?>" <?= ($bailleur->id == $location->id_bailleur) ? 'selected' : '' ?>>
+                    <?= htmlspecialchars($bailleur->nom) ?> <?= htmlspecialchars($bailleur->prenom) ?>
                 </option>
-            <?php endforeach; ?>
+            <?php endwhile; ?>
         </select><br>
+      
         
-        <div class="col-12">
-          <button type="submit" name='envoyer' class="btn btn-primary">Modifier</button>
+        <div class="d-flex gap-2 mt-3">
+          <button type="submit" name="envoyer" class="btn btn-primary">Modifier</button>
+          <a href="locations.php" class="btn btn-danger">Annuler</a>
         </div>
       </div>
     </form>

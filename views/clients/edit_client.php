@@ -45,6 +45,8 @@ include_once '../../navbar.php';
 
       <div class="col-12">
         <button type="submit" name='envoyer' class="btn btn-primary">Modifier</button>
+        <a href="clients.php" class="btn btn-warning ">Annuler</a>
+
       </div>
     </form>
     <?php endif ?>

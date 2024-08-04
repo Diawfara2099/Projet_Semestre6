@@ -57,4 +57,9 @@ function getLocationsByBailleur($id_bailleur) {
     $query->execute();
     return $query;
 }
-
+function getAllBailleurs2() {
+    global $connexion; // Assuming $pdo is your PDO instance
+    $stmt = $connexion->prepare("SELECT id, nom, prenom FROM bailleurs");
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_OBJ); // Ensure this returns objects
+}

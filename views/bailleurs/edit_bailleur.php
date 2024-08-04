@@ -43,8 +43,9 @@ include_once '../../navbar.php';
         <input type="text" class="form-control" name="CIN" value="<?= $CIN; ?>">
       </div>
 
-      <div class="col-12">
+      <div class="d-flex gap-2 mt-3">
         <button type="submit" name='envoyer' class="btn btn-primary">Modifier</button>
+        <a href="bailleurs.php" class="btn btn-danger">Annuler</a>
       </div>
     </form>
     <?php endif ?>

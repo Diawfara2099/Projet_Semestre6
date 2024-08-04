@@ -30,7 +30,7 @@ CREATE TABLE `bailleur` (
   `tel` varchar(15) DEFAULT NULL,
   `CIN` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -59,7 +59,7 @@ CREATE TABLE `client` (
   `CIN` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `CIN` (`CIN`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -91,7 +91,7 @@ CREATE TABLE `contrat` (
   KEY `FK_contrat_location` (`id_location`),
   CONSTRAINT `FK_contrat_client` FOREIGN KEY (`id_client`) REFERENCES `client` (`id`),
   CONSTRAINT `FK_contrat_location` FOREIGN KEY (`id_location`) REFERENCES `location` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -115,13 +115,13 @@ CREATE TABLE `location` (
   `id` int NOT NULL AUTO_INCREMENT,
   `libelle` varchar(255) NOT NULL,
   `adresse` varchar(255) NOT NULL,
-  `type` enum('maison','studio','appartement') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `type` enum('maison','studio','appartement') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `prix` decimal(20,6) NOT NULL DEFAULT '0.000000',
   `id_bailleur` int DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `location_bailleur` (`id_bailleur`),
   CONSTRAINT `location_bailleur` FOREIGN KEY (`id_bailleur`) REFERENCES `bailleur` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -151,7 +151,7 @@ CREATE TABLE `paiements` (
   KEY `FK_paiement_user` (`gestionnaire_id`),
   CONSTRAINT `FK_paiement_contrat` FOREIGN KEY (`contrat_id`) REFERENCES `contrat` (`id`),
   CONSTRAINT `FK_paiement_user` FOREIGN KEY (`gestionnaire_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -177,10 +177,10 @@ CREATE TABLE `user` (
   `prenom` varchar(50) NOT NULL DEFAULT '0',
   `login` varchar(50) NOT NULL DEFAULT '0',
   `email` varchar(50) NOT NULL DEFAULT '0',
-  `password` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '0',
+  `password` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '0',
   `type` enum('administrateur','gestionnaire') NOT NULL DEFAULT 'administrateur',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --

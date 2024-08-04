@@ -39,7 +39,10 @@ $user = getUserById($_GET['id']);
                     <option value="administrateur" <?= $user->type == 'administrateur' ? 'selected' : '' ?>>Administrateur</option>
                 </select>
             </div>
-            <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
+            <div class="d-flex gap-2 mt-3">
+            <button type="submit" class="btn btn-primary">Modifier</button>
+            <a href="users.php" class="btn btn-warning ">Annuler</a>
+            </div>
         </form>
     </div>
 </main>

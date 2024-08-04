@@ -70,6 +70,15 @@ function getOnLocation($id) {
     $query->execute([$id]);
     return $query;
 }
+
+// Your existing functions
+
+function getAllBailleurs() {
+    global $connexion;
+    $query = "SELECT * FROM Bailleur";
+    $result = $connexion->query($query);
+    return $result;
+}
 ?>
 
 
